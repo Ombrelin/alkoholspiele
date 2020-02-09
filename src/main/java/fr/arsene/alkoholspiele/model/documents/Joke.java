@@ -6,7 +6,7 @@ import lombok.Data;
 public class Joke {
 
     private String id;
-
+    private String author;
     private String content;
 
 }
