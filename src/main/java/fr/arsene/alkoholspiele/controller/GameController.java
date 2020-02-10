@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 public class GameController {
 
     private GameRepository gameRepository;
+
     public GameController(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
     }
@@ -20,7 +21,7 @@ public class GameController {
     @PostMapping("/")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Game> createGame(@RequestBody Game game){
+    public Mono<Game> createGame(@RequestBody Game game) {
         return this.gameRepository.save(game);
     }
 
@@ -28,16 +29,19 @@ public class GameController {
     @GetMapping("/{gameId}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public Mono<Game> getGamebyId(@PathVariable("gameId") String gameId){
+    public Mono<Game> getGamebyId(@PathVariable("gameId") String gameId) {
         return this.gameRepository.findById(gameId);
     }
 
     // Add Joke to a game from its id
     @PostMapping("/{gameId}/jokes")
-    public Mono<Game> addJoke(@PathVariable("gameId") String gameId, @RequestBody Joke joke){
-        Game game = this.gameRepository.findById(gameId).block();
-        game.getJokes().add(joke);
-        return this.gameRepository.save(game);
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public Mono<Game> addJoke(@PathVariable("gameId") String gameId, @RequestBody Joke joke) {
+        return this.gameRepository.findById(gameId).map(e -> {
+            e.getJokes().add(joke);
+            return e;
+        }).flatMap(e -> this.gameRepository.save(e));
     }
 
 }
