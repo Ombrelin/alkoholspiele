@@ -26,7 +26,7 @@ export class Game {
 })
 export class GameServiceService {
 
-  private api = 'https://192.168.10.23:5001/api/';
+  private api = 'https://alkoholspiele.arsenelapostolet.fr/api/';
 
   constructor(
     private httpClient: HttpClient
