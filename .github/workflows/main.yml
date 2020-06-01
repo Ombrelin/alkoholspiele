@@ -1,0 +1,19 @@
+name: Docker Image CI Master
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build -t ombrelin/alkoholspiele:1.0 . --file Dockerfile
+      - name: Docker login
+        run: echo '${{ secrets.DOCKER_TOKEN }}' | docker login --username ombrelin --password-stdin
+      - name: Publish to Docker hub
+        run: docker push ombrelin/alkoholspiele:1.0
