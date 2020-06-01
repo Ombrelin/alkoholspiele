@@ -1,0 +1,38 @@
+<mat-card *ngIf="!started && !finished">
+  <mat-card-header></mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="addedPlayer"/>
+
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addPlayer()">Add player</button>
+    <mat-list>
+      <mat-list-item *ngFor="let player of players">
+        <span matLine>{{player}}</span>
+        <span><button mat-icon-button (click)="removePlayer(player)"><mat-icon>delete</mat-icon></button></span>
+      </mat-list-item>
+    </mat-list>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="start()">Start</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="started && !finished">
+  <mat-card-header>
+    <mat-card-title>Current joke</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    {{joke}}
+
+    <mat-progress-bar mode="determinate" [value]="((game.jokes.length - remainingJokes.length)/game.jokes.length)*100"></mat-progress-bar>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="next(false)">Next</button>
+  </mat-card-actions>
+</mat-card>
+<div *ngIf="finished">
+  <span >Game finished !</span>
+  <button mat-raised-button color="primary" (click)="document.location.reload(true)">Replay</button>
+</div>

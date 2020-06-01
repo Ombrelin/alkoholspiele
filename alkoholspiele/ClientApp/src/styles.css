@@ -17,3 +17,21 @@ code {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #616161}
+
+h1 {
+  text-align: center;
+}
+
+mat-card {
+  margin-top: 8rem;
+  padding: 4rem;
+  border-radius: 0;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  width: 100%;
+}

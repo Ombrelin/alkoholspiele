@@ -1,7 +1,15 @@
 using System;
+using alkoholspiele.Database;
+using alkoholspiele.Mapper;
+using alkoholspiele.Repositories;
+using alkoholspiele.Repositories.Interfaces;
+using alkoholspiele.Services;
+using alkoholspiele.Services.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +30,16 @@ namespace alkoholspiele
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseNpgsql(this.GetPostgresConnectionString());
+            });
+            
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IGameRepository, GameRepository>();
+            services.AddAutoMapper(typeof(Mappings));
             
             services.AddSwaggerGen(options =>
             {
@@ -115,7 +133,7 @@ namespace alkoholspiele
                 Username = userInfo[0],
                 Password = userInfo[1],
                 Database = databaseUri.LocalPath.TrimStart('/'),
-                SslMode = SslMode.Require,
+                SslMode = SslMode.Prefer,
                 TrustServerCertificate = true
             };
 
