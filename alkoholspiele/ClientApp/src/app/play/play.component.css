@@ -1,0 +1,18 @@
+.joke {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.joke-container {
+  padding: 3rem;
+}
+
+.buttons button {
+  margin-top: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .add-player {
+    height: 3.1rem;
+  }
+}

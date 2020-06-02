@@ -20,6 +20,9 @@ import { AddJokeDialogComponent } from './add-joke-dialog/add-joke-dialog.compon
 import { PlayComponent } from './play/play.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatIconModule} from '@angular/material/icon';
+import { NameDialogComponent } from './name-dialog/name-dialog.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { Ng2OdometerModule } from 'ng2-odometer';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import {MatIconModule} from '@angular/material/icon';
     GameComponent,
     AddJokeDialogComponent,
     PlayComponent,
+    NameDialogComponent,
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,9 +53,11 @@ import {MatIconModule} from '@angular/material/icon';
     ChartsModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule,
+    Ng2OdometerModule.forRoot()
   ],
-  entryComponents: [AddJokeDialogComponent],
+  entryComponents: [AddJokeDialogComponent, NameDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -7,11 +7,15 @@
     <div class="container">
 
       <div class="row">
-        <div class="col-12">
+        <div class="col-10">
           <h2>{{game.name}}</h2>
-          <span class="author">created by {{game.author}}</span><br>
+          <span class="author">created by {{game.author}}</span>
+        </div>
+        <div class="col-2 d-flex justify-content-end">
+          <ng2-odometer class="count" [number]="game.jokes.length" [config]="{ }"></ng2-odometer>
+        </div>
 
-          Jokes count : {{game.jokes.length}}
+        <div class="col-12">
 
           <div style="display: block">
             <canvas baseChart

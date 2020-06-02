@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Game, GameServiceService} from "../services/game-service.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Label} from "ng2-charts";
-import {ChartDataSets} from "chart.js";
-import {MatDialog} from "@angular/material/dialog";
-import {AddJokeDialogComponent} from "../add-joke-dialog/add-joke-dialog.component";
+import {Game, GameServiceService} from '../services/game-service.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Label} from 'ng2-charts';
+import {ChartDataSets} from 'chart.js';
+import {MatDialog} from '@angular/material/dialog';
+import {AddJokeDialogComponent} from '../add-joke-dialog/add-joke-dialog.component';
+import {NameDialogComponent} from "../name-dialog/name-dialog.component";
 
 @Component({
   selector: 'app-game',
@@ -33,6 +34,9 @@ export class GameComponent implements OnInit {
   }
 
   async ngOnInit() {
+
+    this.checkUsername();
+
     this.route.params.subscribe(async params => {
       const id = params['id'];
 
@@ -59,6 +63,10 @@ export class GameComponent implements OnInit {
   }
 
   addJoke() {
+
+    this.checkUsername();
+
+
     const dialogRef = this.dialog.open(AddJokeDialogComponent, {
       width: '400px'
     });
@@ -73,5 +81,19 @@ export class GameComponent implements OnInit {
 
   play() {
     this.router.navigate(['/play', this.game.id]);
+  }
+
+  checkUsername() {
+    const username = sessionStorage.getItem('username');
+    if (!username || username === 'undefined') {
+      console.log('ask username');
+      const dialogRef = this.dialog.open(NameDialogComponent, {
+        width: '400px'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        sessionStorage.setItem('username', result);
+          this.checkUsername();
+      });
+    }
   }
 }

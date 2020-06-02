@@ -1,11 +1,21 @@
 <mat-card *ngIf="!started && !finished">
-  <mat-card-header></mat-card-header>
-  <mat-card-content>
-    <mat-form-field>
-      <input matInput placeholder="Name" [(ngModel)]="addedPlayer"/>
 
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="addPlayer()">Add player</button>
+  <h2>Players creation</h2>
+  <br>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-8 col-xs-12">
+        <mat-form-field appearance="fill">
+          <mat-label>Player name...</mat-label>
+          <input [(ngModel)]="addedPlayer" matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-xs-12">
+        <button class="add-player" mat-raised-button color="primary" (click)="addPlayer()">Add player</button>
+      </div>
+
+
+    </div>
     <mat-list>
       <mat-list-item *ngFor="let player of players">
         <span matLine>{{player}}</span>
@@ -14,25 +24,28 @@
     </mat-list>
 
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="start()">Start</button>
-  </mat-card-actions>
+  <button mat-raised-button color="primary" (click)="start()">Start</button>
 </mat-card>
 
 <mat-card *ngIf="started && !finished">
-  <mat-card-header>
-    <mat-card-title>Current joke</mat-card-title>
-  </mat-card-header>
+  <h2>Current joke</h2>
   <mat-card-content>
-    {{joke}}
-
-    <mat-progress-bar mode="determinate" [value]="((game.jokes.length - remainingJokes.length)/game.jokes.length)*100"></mat-progress-bar>
+    <div class="joke-container d-flex justify-content-center">
+      <span class="joke">{{joke}}</span>
+    </div>
+    <mat-progress-bar mode="determinate"
+                      [value]="((game.jokes.length - remainingJokes.length)/game.jokes.length)*100"></mat-progress-bar>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="next(false)">Next</button>
   </mat-card-actions>
 </mat-card>
-<div *ngIf="finished">
-  <span >Game finished !</span>
-  <button mat-raised-button color="primary" (click)="document.location.reload(true)">Replay</button>
-</div>
+<mat-card *ngIf="finished">
+  <div class="joke-container d-flex justify-content-center">
+    <span class="joke">Game Finshed</span>
+  </div>
+  <div class="buttons">
+    <button mat-raised-button color="primary" (click)="document.location.reload(true)">Replay</button>
+    <button mat-raised-button color="primary" [routerLink]="['/game', gameId]">Home</button>
+  </div>
+</mat-card>

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>What is your name ?</h1>
+
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Player name...</mat-label>
+    <input [(ngModel)]="name" (ngModelChange)="handleChange()" matInput>
+  </mat-form-field>
+
+</div>
+
+
+<div mat-dialog-actions>
+  <button [disabled]="this.disabled" mat-raised-button color="primary" [mat-dialog-close]="name" >Save</button>
+</div>
