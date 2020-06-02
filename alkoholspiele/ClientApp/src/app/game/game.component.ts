@@ -17,7 +17,10 @@ export class GameComponent implements OnInit {
   public game: Game;
   public barChartOptions = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{ticks: {beginAtZero: true}}]
+    }
   };
 
   private contributions: Map<string, number> = new Map<string, number>();
@@ -92,7 +95,7 @@ export class GameComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         sessionStorage.setItem('username', result);
-          this.checkUsername();
+        this.checkUsername();
       });
     }
   }
