@@ -15,3 +15,18 @@ Frontend :
 - Angular 8
 - Angular Material
 - Chart.js
+
+## Docker Deployment
+
+With docer-compose :
+
+```yml
+  alkoholspiele:
+    image: ombrelin/alkoholspiele:1.0
+    container_name: alkoholspiele
+    ports:
+      - "80:80"
+    environment:
+      - DATABASE_URL=<Postgres database URL>
+    restart: unless-stopped
+```
