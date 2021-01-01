@@ -18,7 +18,7 @@ Frontend :
 
 ## Docker Deployment
 
-With docer-compose :
+With docker-compose :
 
 ```yml
   alkoholspiele:
