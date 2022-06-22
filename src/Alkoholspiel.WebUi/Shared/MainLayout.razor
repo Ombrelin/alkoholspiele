@@ -1,0 +1,62 @@
+﻿@using Alkoholspiel.WebUi.Pages
+@inherits LayoutComponentBase
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<div class="page">
+    @if (DisplayNameDialog)
+    {
+        <FluentDialog class="name-dialog">
+            <div class="p-3">
+                <h2>What is your name ?</h2>
+
+                <div class="d-flex flex-column gap-3">
+                    <div>
+                        <label>Name :</label>
+                        <FluentTextField @bind-Value="@Name"></FluentTextField>
+                    </div>
+
+                    <FluentButton Appearance="@Appearance.Accent" @onclick="HandleClickCreate">Register name</FluentButton>
+                </div>
+            </div>
+        </FluentDialog>
+    }
+    
+    <div class="sidebar">
+        <NavMenu/>
+    </div>
+
+    <main>
+        <article class="content px-4">
+            @Body
+
+        </article>
+    </main>
+
+
+</div>
+
+<style>
+    .name-dialog {
+        z-index: 1;
+    }
+</style>
+
+@code
+{
+    private string Name;
+
+    private async Task HandleClickCreate()
+    {
+        Console.WriteLine(Name);
+        DisplayNameDialog = false;
+        await localStorage.SetItemAsStringAsync("name", Name);
+    }
+
+    private bool DisplayNameDialog { get; set; } = true;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        DisplayNameDialog = !await localStorage.ContainKeyAsync("name");
+    }
+}

@@ -1,1 +1,4 @@
 ﻿alkoholspiele/.idea
+.idea
+**/bin
+**/obj

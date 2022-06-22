@@ -1,0 +1,22 @@
+﻿@page "/game/create"
+
+<h3>Create a new game</h3>
+
+<div class="d-flex flex-column gap-3">
+    <div>
+        <label>Name :</label>
+        <FluentTextField @bind-Value="@Name"></FluentTextField>
+    </div>
+
+    <FluentButton Appearance="@Appearance.Accent" @onclick="HandleClickCreate">Create Game</FluentButton>
+</div>
+
+@code {
+    private string Name;
+
+    private void HandleClickCreate()
+    {
+        Console.WriteLine(Name);
+    }
+
+}
