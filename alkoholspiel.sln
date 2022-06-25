@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alkoholspiel.Core.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alkoholspiel.WebUi", "src\Alkoholspiel.WebUi\Alkoholspiel.WebUi.csproj", "{CABA9E40-24C1-4BDD-9534-1270B76E2700}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alkohospiel.WebUi.Tests", "tests\Alkohospiel.WebUi.Tests\Alkohospiel.WebUi.Tests.csproj", "{433ACCB5-C617-4D18-A3BE-D8A008C82280}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alkoholspiel.WebApi.Tests", "tests\Alkoholspiel.WebApi.Tests\Alkoholspiel.WebApi.Tests.csproj", "{03FC46F4-F1D0-4B17-B89B-CD478D5F4724}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,11 +42,20 @@ Global
 		{CABA9E40-24C1-4BDD-9534-1270B76E2700}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CABA9E40-24C1-4BDD-9534-1270B76E2700}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CABA9E40-24C1-4BDD-9534-1270B76E2700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{433ACCB5-C617-4D18-A3BE-D8A008C82280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{433ACCB5-C617-4D18-A3BE-D8A008C82280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{433ACCB5-C617-4D18-A3BE-D8A008C82280}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{433ACCB5-C617-4D18-A3BE-D8A008C82280}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03FC46F4-F1D0-4B17-B89B-CD478D5F4724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03FC46F4-F1D0-4B17-B89B-CD478D5F4724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03FC46F4-F1D0-4B17-B89B-CD478D5F4724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03FC46F4-F1D0-4B17-B89B-CD478D5F4724}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{661E24E6-75D8-43FD-98C3-10AA32E08281} = {CFC18D72-9492-40CD-9EC2-6C23E65A7A7E}
 		{6952D4C2-3072-4E8D-8867-102C7033ED53} = {CFC18D72-9492-40CD-9EC2-6C23E65A7A7E}
 		{B85A7945-1D48-43BE-8981-1441A88FBE67} = {CFC18D72-9492-40CD-9EC2-6C23E65A7A7E}
 		{CABA9E40-24C1-4BDD-9534-1270B76E2700} = {CFC18D72-9492-40CD-9EC2-6C23E65A7A7E}
+		{433ACCB5-C617-4D18-A3BE-D8A008C82280} = {CFC18D72-9492-40CD-9EC2-6C23E65A7A7E}
 	EndGlobalSection
 EndGlobal
