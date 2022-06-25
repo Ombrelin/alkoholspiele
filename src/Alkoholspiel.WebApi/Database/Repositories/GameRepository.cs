@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Alkoholspiel.Core;
 using Alkoholspiel.Core.Entities;
+using Alkoholspiel.WebApi.Database.Entities;
 
 namespace Alkoholspiel.WebApi.Database.Repositories;
 
@@ -13,8 +14,11 @@ public class GameRepository : IGameRepository
         this.context = context;
     }
 
-    public Task<Game> Insert(Game game)
+    public async Task<Game> Insert(Game game)
     {
-        throw new System.NotImplementedException();
+        var gameEntity = new GameEntity(game);
+        this.context.Games.Add(gameEntity);
+        await this.context.SaveChangesAsync();
+        return gameEntity.ToDomainEntity();
     }
 }
