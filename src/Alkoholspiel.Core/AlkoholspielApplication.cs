@@ -1,24 +1,25 @@
-﻿using Alkoholspiel.Core.Entities;
+﻿using Alkoholspiel.Core.Contracts;
+using Alkoholspiel.Core.Entities;
 using Alkoholspiel.Core.Notifications;
 
 namespace Alkoholspiel.Core;
 
 public class AlkoholspielApplication
 {
-    private readonly INotificationManager notificationManager;
+    //private readonly INotificationManager notificationManager;
     private readonly IGameRepository gamesRepository;
-    private readonly IJokeRepository jokesRepository;
+    //private readonly IJokeRepository jokesRepository;
     
-    public AlkoholspielApplication(INotificationManager notificationManager, IJokeRepository jokesRepository, IGameRepository gamesRepository)
+    public AlkoholspielApplication(/*INotificationManager notificationManager, IJokeRepository jokesRepository,*/ IGameRepository gamesRepository)
     {
-        this.notificationManager = notificationManager;
-        this.jokesRepository = jokesRepository;
+        //this.notificationManager = notificationManager;
+        //this.jokesRepository = jokesRepository;
         this.gamesRepository = gamesRepository;
     }
 
-    public async Task<IGame> CreateGame(string name, string author)
+    public async Task<IGame> CreateGame(CreateGameRequest dto)
     {
-        var game = new Game(name, author);
+        var game = new Game(name: dto.name, author:dto.author);
         return await this.gamesRepository.Insert(game);
     }
 

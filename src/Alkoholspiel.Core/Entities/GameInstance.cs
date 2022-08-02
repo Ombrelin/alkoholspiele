@@ -10,7 +10,7 @@ public class GameInstance : IGameInstanceWithCompletions
     public GameInstance(Game game)
     {
         Id = Guid.NewGuid();
-        this.Game = game;
+        Game = game;
         StartDateTime = DateTime.Now;
         JokeCompletions = new List<JokeCompletion>();
     }

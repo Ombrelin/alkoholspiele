@@ -27,6 +27,7 @@ public class Startup
         ConfigureDbContext(services);
 
         services.AddScoped<IGameRepository, GameRepository>();
+        services.AddScoped<AlkoholspielApplication>();
 
         services.AddSwaggerGen(options =>
         {
@@ -53,9 +54,12 @@ public class Startup
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env /*ApplicationDbContext dataContext*/)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        //dataContext.Database.Migrate();
+        using IServiceScope serviceScope = app.ApplicationServices.CreateScope();
+        (serviceScope.ServiceProvider.GetService<ApplicationDbContext>() 
+         ?? throw new InvalidOperationException("Can't get db context from DI scope"))
+            .Database.Migrate();
 
         if (env.IsDevelopment())
         {

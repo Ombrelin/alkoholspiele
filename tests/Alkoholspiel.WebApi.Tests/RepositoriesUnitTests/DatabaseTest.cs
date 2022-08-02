@@ -1,4 +1,7 @@
 ﻿using Alkoholspiel.WebApi.Database;
+using DotNet.Testcontainers.Builders;
+using DotNet.Testcontainers.Configurations;
+using DotNet.Testcontainers.Containers;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Xunit;
@@ -7,34 +10,33 @@ namespace Alkohospiel.WebUi.Tests.RepositoriesUnitTests;
 
 public class DatabaseTest : IAsyncLifetime
 { 
-    protected readonly ApplicationDbContext Context;
+    protected ApplicationDbContext Context;
+    private readonly TestcontainerDatabase database = new TestcontainersBuilder<PostgreSqlTestcontainer>()
+        .WithDatabase(new PostgreSqlTestcontainerConfiguration
+        {
+            Database = "db",
+            Username = "postgres",
+            Password = "postgres",
+        })
+        .Build();
 
-    public DatabaseTest()
+    public async Task InitializeAsync()
     {
-        Context = BuildNewDbContext();
+        await this.database.StartAsync();
+        this.Context = BuildNewDbContext();
+        await Context.Database.MigrateAsync();
     }
-
-    public Task InitializeAsync() => Context.Database.MigrateAsync();
 
     public async Task DisposeAsync()
     {
-        this.Context.RemoveRange(this.Context.Games);
-        await this.Context.SaveChangesAsync();
         await this.Context.DisposeAsync();
+        await this.database.DisposeAsync();
     }
     
     private ApplicationDbContext BuildNewDbContext()
     {
-        var builder = new NpgsqlConnectionStringBuilder
-        {
-            Host = Environment.GetEnvironmentVariable("DB_HOST"),
-            Port = int.Parse(Environment.GetEnvironmentVariable("DB_PORT")),
-            Username = Environment.GetEnvironmentVariable("DB_USERNAME"),
-            Password = Environment.GetEnvironmentVariable("DB_PASSWORD"),
-            Database = Environment.GetEnvironmentVariable("DB_NAME")
-        };
         var options = new DbContextOptionsBuilder()
-            .UseNpgsql(builder.ToString())
+            .UseNpgsql(this.database.ConnectionString)
             .Options;
 
         return new ApplicationDbContext(options);

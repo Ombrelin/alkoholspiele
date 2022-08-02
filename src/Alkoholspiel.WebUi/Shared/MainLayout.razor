@@ -6,16 +6,16 @@
     @if (DisplayNameDialog)
     {
         <FluentDialog class="name-dialog">
-            <div class="p-3">
+            <div id="user-name-form" class="p-3">
                 <h2>What is your name ?</h2>
 
                 <div class="d-flex flex-column gap-3">
                     <div>
                         <label>Name :</label>
-                        <FluentTextField @bind-Value="@Name"></FluentTextField>
+                        <FluentTextField id="user-name" @bind-Value="@Name"></FluentTextField>
                     </div>
 
-                    <FluentButton Appearance="@Appearance.Accent" @onclick="HandleClickCreate">Register name</FluentButton>
+                    <FluentButton id="save-name" Appearance="@Appearance.Accent" @onclick="HandleClickCreate">Register name</FluentButton>
                 </div>
             </div>
         </FluentDialog>

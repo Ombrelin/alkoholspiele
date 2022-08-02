@@ -2,17 +2,20 @@
 
 namespace Alkohospiel.WebUi.Tests.PageObjects;
 
-public class CreateGamePage
+public class CreateGamePage : Page
 {
-    private readonly IPage page;
-
-    public CreateGamePage(IPage page)
+    public CreateGamePage(IPage page) : base(page)
     {
-        this.page = page;
     }
 
-    public async Task Goto()
+    public async Task GotoAsync()
     {
-        await page.GotoAsync("http://localhost");
+        await page.GotoAsync("http://localhost/game/create");
+    }
+
+    public async Task CreateGameAsync(string gameName)
+    {
+        await page.Locator("#game-form input").FillAsync(gameName);
+        await page.Locator("#game-form button").ClickAsync();
     }
 }

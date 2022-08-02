@@ -6,6 +6,11 @@ namespace Alkoholspiel.WebApi.Database.Entities;
 
 public class GameEntity
 {
+    public GameEntity()
+    {
+        
+    }
+    
     public GameEntity(Game game)
     {
         Id = game.Id;
@@ -16,7 +21,6 @@ public class GameEntity
     public Guid Id { get; set; }
     public string Name { get; set; }
     public string Author { get; set; }
-    public List<JokeEntity> Jokes { get; set; }
 
     public Game ToDomainEntity() => new Game(Id, Name, Author);
 }

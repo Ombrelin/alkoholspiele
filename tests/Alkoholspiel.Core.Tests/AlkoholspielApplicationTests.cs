@@ -1,4 +1,5 @@
-﻿using Alkoholspiel.Core.Entities;
+﻿using Alkoholspiel.Core.Contracts;
+using Alkoholspiel.Core.Entities;
 using Alkoholspiel.Core.Tests.FakeRepositories;
 using FluentAssertions;
 
@@ -14,10 +15,10 @@ public class AlkoholspielApplicationTests
         const string author = "Test Author";
 
         var fakeGameRepository = new FakeGameRepository();
-        var application = new AlkoholspielApplication(null, null, fakeGameRepository);
+        var application = new AlkoholspielApplication( /*null, null,*/ fakeGameRepository);
 
         // When
-        IGame result = await application.CreateGame(name,author);
+        IGame result = await application.CreateGame(new CreateGameRequest(name: name, author: author));
 
         // Then
         result.Name.Should().Be(name);

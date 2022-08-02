@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Alkoholspiel.Core;
+using Alkoholspiel.Core.Contracts;
+using Alkoholspiel.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Alkoholspiel.WebApi.Controllers;
@@ -16,9 +19,10 @@ public class GamesController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult CreateGame(/*[FromBody] UpsertGameDTO dto*/)
+    public async Task<ActionResult<IGame>> CreateGame([FromBody] CreateGameRequest dto)
     {
-        throw new NotImplementedException();
+        IGame game = await this.application.CreateGame(dto);
+        return Created("", game);
     }
 
     [HttpGet("{gameId:Guid}")]

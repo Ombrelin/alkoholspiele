@@ -1,0 +1,25 @@
+version: "3.9"
+services: 
+  app: 
+    container_name: app
+    build:
+      context: .
+      dockerfile: src/Alkoholspiel.WebApi/Dockerfile
+    depends_on:
+      - database
+    environment:
+      - DB_HOST=localhost
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=alkoholspiel
+    ports:
+      - "80:80"
+  database:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=alkoholspiel

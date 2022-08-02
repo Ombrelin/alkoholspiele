@@ -10,7 +10,6 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<GameEntity> Games { get; set; }
-    public DbSet<JokeEntity> Jokes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
