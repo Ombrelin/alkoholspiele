@@ -1,0 +1,6 @@
+ktor:
+    application:
+        modules:
+            - arsenelapostolet.fr.alkoholspiele.ApplicationKt.module
+    deployment:
+        port: 8080

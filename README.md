@@ -7,14 +7,10 @@ Alkohospiele is a simple webapp that implements the drinking game "Piccolo" with
 ## Tech Stack
 
 Backend : 
-- ASP .NET Core WebApi
-- EF Core
+- Ktor WebApi
 - PostgreSQL
 
-Frontend : 
-- Angular 8
-- Angular Material
-- Chart.js
+Frontend : ?
 
 ## Docker Deployment
 
@@ -22,7 +18,7 @@ With docker-compose :
 
 ```yml
   alkoholspiele:
-    image: ombrelin/alkoholspiele:1.0
+    image: ombrelin/alkoholspiele:2.0
     container_name: alkoholspiele
     ports:
       - "80:80"
